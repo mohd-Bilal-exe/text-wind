@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "../../src/index.ts";
+
+@layer theme {
+  --fluid-vw-min: 320px;
+  --fluid-vw-max: 1280px;
+}
