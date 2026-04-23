@@ -7,6 +7,7 @@ Use the `text-*-color` utilities for typography color tokens:
 - `text-body-color`
 - `text-muted-color`
 - `text-accent-color`
+- `text-callout-color`
 
 Opacity modifiers work the same way as Tailwind color utilities:
 
