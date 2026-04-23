@@ -3,7 +3,7 @@ import type { ColorGeneratorOptions } from '../types';
 import { buildOpacityColor, buildSelector, formatScaleModifierLabel, normalizeScaleModifier, serializeCssRule } from './helpers';
 
 function resolveColor(name: string, override?: string): string {
-  return override ?? DEFAULT_COLORS[name] ?? `var(--color-text-${name})`;
+  return override ?? DEFAULT_COLORS[name] ?? `var(--color-fluid-${name})`;
 }
 
 export function generateColorDeclarations(

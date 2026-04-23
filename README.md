@@ -1,8 +1,8 @@
-# Fluidwind
+# Textwind
 
 > A complete typography system for Tailwind with inline scale modifiers. No breakpoints, no config edits, no rebuilds.
 
-Fluidwind gives you fluid sizing, font family utilities, color utilities, and optical tracking adjustments in one Tailwind plugin.
+Textwind gives you fluid sizing, font family utilities, color utilities, and optical tracking adjustments in one Tailwind plugin.
 
 ## Features
 
@@ -16,19 +16,19 @@ Fluidwind gives you fluid sizing, font family utilities, color utilities, and op
 ## Install
 
 ```bash
-npm install fluidwind
+npm install text-wind
 ```
 
 ## Tailwind v3
 
 ```ts
 // tailwind.config.ts
-import fluidwind from 'fluidwind';
+import textwind from 'text-wind';
 
 export default {
   content: ['./src/**/*.{ts,tsx,js,jsx,mdx}'],
   plugins: [
-    fluidwind(),
+    textwind(),
   ],
 };
 ```
@@ -64,7 +64,7 @@ export default {
 
 ```css
 @import "tailwindcss";
-@plugin "fluidwind";
+@plugin "text-wind";
 
 @theme {
   --fluid-vw-min: 320px;
@@ -91,7 +91,7 @@ export default {
 ## Plugin Options
 
 ```ts
-fluidwind({
+textwind({
   scales: [50, 60, 70, 80, 90, 100, 110, 120, 150, 200],
   viewportMin: 320,
   viewportMax: 1280,

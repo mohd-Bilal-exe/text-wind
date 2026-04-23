@@ -33,11 +33,11 @@ export default function HorizontalSection({
   // Desktop Positions
   // Right-Stack: 56px width for ribbons initially.
   const stackOffset = (totalSections - index) * 56;
-  
+
   // Sticky Position on the left: previous ribbons collapsed to 40px.
   const stickyLeftPx = index * 40;
 
-  // IMPORTANT: We must match the exact string format 'calc(A vw + B px)' 
+  // IMPORTANT: We must match the exact string format 'calc(A vw + B px)'
   // so Framer Motion can interpolate between them properly!
   const rightStackX_px = `calc(100vw + ${-stackOffset}px)`;
   const leftStickX_px = `calc(0vw + ${stickyLeftPx}px)`;
@@ -122,17 +122,17 @@ export default function HorizontalSection({
         {/* Ribbon - Anchors to the moving section wrapper */}
         <motion.div
           style={{ width: currentRibbonWidth }}
-          className={`shrink-0 h-full border-l border-r border-charcoal/10 flex flex-col items-center py-12 ${color} bg-opacity-100 shadow-xl pointer-events-auto relative overflow-hidden transition-all duration-300`}
+          className={`shrink-0 h-full border-l border-r border-charcoal/10 flex flex-col items-center justify-start py-12 ${color} bg-opacity-100 shadow-xl pointer-events-auto relative overflow-hidden transition-all duration-300`}
         >
           {/* Active Indicator (Asterisk) */}
           <motion.div
             style={{ opacity: isCurrentlyActive }}
-            className="text-crimson font-black text-4xl mb-8 leading-none"
+            className="text-crimson font-black text-4xl mb-16 leading-none"
           >
             *
           </motion.div>
 
-          <div className="rotate-90 origin-center whitespace-nowrap font-bold tracking-[0.4em] uppercase text-fluid-caption opacity-80">
+          <div className="rotate-90 bg-amber-600 origin-center whitespace-nowrap font-bold tracking-[0.4em] uppercase text-fluid-caption opacity-80">
             {label}
           </div>
 

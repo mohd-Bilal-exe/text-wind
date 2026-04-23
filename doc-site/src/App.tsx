@@ -29,10 +29,10 @@ function App() {
       color: 'bg-white',
       content: (
         <div className="h-full flex flex-col justify-center p-12 md:p-0 relative overflow-hidden">
-          <span className="font-sans font-black text-crimson text-fluid-caption tracking-[0.6em] uppercase mb-4 block">
+          <span className="font-sans font-black text-crimson text-fluid-caption tracking-[0.6em] uppercase mb-8 block">
             THE EXHIBITION
           </span>
-          <h2 className="text-fluid-heading leading-[0.75] font-display font-black text-charcoal tracking-[-0.08em] uppercase mb-12">
+          <h2 className="text-fluid-heading/70 leading-[0.75] font-display font-black text-charcoal tracking-[-0.08em] uppercase mb-12">
             Scales
           </h2>
           <div className="flex flex-col gap-8 max-w-xl text-charcoal/80">
@@ -93,8 +93,7 @@ function App() {
             SARTORIAL <span className="text-crimson">CODE.</span>
           </h3>
           <p className="font-sans text-fluid-body leading-relaxed text-charcoal/70 max-w-md">
-            Textwind is the result of thousands of hours spent perfecting architectural type
-            scales.
+            Textwind is the result of thousands of hours spent perfecting architectural type scales.
           </p>
         </div>
       ),
