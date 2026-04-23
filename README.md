@@ -8,8 +8,9 @@ Textwind gives you fluid sizing, font family utilities, color utilities, and opt
 
 - Inline scale modifiers like `text-fluid-heading/80`
 - Arbitrary modifier support like `text-fluid-heading/[73]`
-- Font family utilities like `font-heading` and `font-body`
-- Color utilities with opacity modifiers like `text-heading-color/80`
+- **11 Professional Fluid Types**: `display`, `heading`, `subheading`, `title`, `body`, `label`, `overline`, `callout`, `caption`, `footnote`, `code`
+- **Hierarchical Font Families**: Consistent tokens for all 11 types
+- **Systematic Colors**: Core tokens like `heading`, `body`, `muted`, `accent`, and `callout`
 - Optical tracking that scales with the text size
 - Tailwind CSS v3.4+ and v4.x compatible
 
@@ -79,13 +80,17 @@ export default {
   Hero title
 </h1>
 
-<h2 className="font-display text-fluid-heading/80 text-heading-color/90">
-  Smaller hero
+<h2 className="font-display text-fluid-display/80 text-heading-color/90">
+  Extreme Display Case
 </h2>
 
 <p className="font-body text-fluid-body text-body-color/80">
   Body copy with fluid line-height and proportional tracking.
 </p>
+
+<span className="font-overline text-fluid-overline text-muted-color uppercase tracking-widest">
+  Section Divider
+</span>
 ```
 
 ## Plugin Options
