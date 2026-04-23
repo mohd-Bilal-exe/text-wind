@@ -11,6 +11,9 @@ interface HorizontalSectionProps {
   index: number;
   scrollProgress: MotionValue<number>;
   totalSections: number;
+  width: number;
+  startProgress: number;
+  endProgress: number;
 }
 
 export default function HorizontalSection({
@@ -20,6 +23,9 @@ export default function HorizontalSection({
   index,
   scrollProgress,
   totalSections,
+  width,
+  startProgress,
+  endProgress,
   color = 'bg-warm-white',
   className = '',
 }: HorizontalSectionProps) {
@@ -27,23 +33,19 @@ export default function HorizontalSection({
   const [isOpen, setIsOpen] = useState(false);
 
   // Range for desktop flight
-  const start = index / totalSections;
-  const end = (index + 1) / totalSections;
+  const start = startProgress;
+  const end = endProgress;
 
   // Desktop Positions
-  // Right-Stack: 56px width for ribbons initially.
   const stackOffset = (totalSections - index) * 56;
-
-  // Sticky Position on the left: previous ribbons collapsed to 40px.
   const stickyLeftPx = index * 40;
 
-  // IMPORTANT: We must match the exact string format 'calc(A vw + B px)'
-  // so Framer Motion can interpolate between them properly!
   const rightStackX_px = `calc(100vw + ${-stackOffset}px)`;
   const leftStickX_px = `calc(0vw + ${stickyLeftPx}px)`;
 
-  // Flight ranges - Slide in over 12% of total scroll distance
-  const flightInEnd = start + 0.12;
+  // Flight ranges - We use a fixed percentage of the section's duration for the slide-in
+  // To match previous behavior (0.12 / 0.2 = 60%), we'll use 60% of the allocated space
+  const flightInEnd = start + (end - start) * 0.6;
   const flightOutStart = end;
 
   const sliceX = useTransform(
@@ -56,14 +58,14 @@ export default function HorizontalSection({
   // Ribbon width collapse: 56px (right stack) -> 80px (active) -> 40px (left stack)
   const currentRibbonWidth = useTransform(
     scrollProgress,
-    [0, start, flightInEnd, flightOutStart, flightOutStart + 0.02, 1],
+    [0, start, flightInEnd, flightOutStart, flightOutStart + (end - start) * 0.05, 1],
     [56, 56, 80, 80, 40, 40]
   );
 
   // Per-section progress bar (0 to 1 while content is active)
   const isCurrentlyActive = useTransform(
     scrollProgress,
-    [start, flightInEnd, flightOutStart, flightOutStart + 0.02],
+    [start, flightInEnd, flightOutStart, flightOutStart + (end - start) * 0.05],
     [0, 1, 1, 0]
   );
 
@@ -71,10 +73,16 @@ export default function HorizontalSection({
     clamp: true,
   });
 
-  // Internal horizontal scroll for content (happens while section stays at left)
-  const internalX = useTransform(scrollProgress, [flightInEnd, flightOutStart], ['0%', '-50%'], {
-    clamp: true,
-  });
+  // Calculate internal scroll distance: contentWidth - viewportWidth
+  // If width is 100 (meaning 100vw), distance is 0.
+  // If width is 150, distance is 50vw.
+  const extraWidthVw = Math.max(0, width - 100);
+  const internalX = useTransform(
+    scrollProgress,
+    [flightInEnd, flightOutStart],
+    ['0vw', `-${extraWidthVw}vw`],
+    { clamp: true }
+  );
 
   if (isMobile) {
     return (
@@ -114,7 +122,7 @@ export default function HorizontalSection({
   }
 
   return (
-    <section className="fixed inset-0 h-screen overflow-hidden pointer-events-none">
+    <section className="absolute top-0 right-0 left-0 bottom-0 h-screen w-svw overflow-hidden pointer-events-none">
       <motion.div
         style={{ x: sliceX, zIndex: 10 + index }}
         className="absolute inset-0 h-full flex pointer-events-none"
@@ -132,7 +140,9 @@ export default function HorizontalSection({
             *
           </motion.div>
 
-          <div className="rotate-90 bg-amber-600 origin-center whitespace-nowrap font-bold tracking-[0.4em] uppercase text-fluid-caption opacity-80">
+          <div
+            className={`rotate-90 origin-center whitespace-nowrap font-bold tracking-[0.4em] uppercase text-fluid-caption opacity-80 ${id === 'FIN' ? 'text-crimson' : ''}`}
+          >
             {label}
           </div>
 
@@ -145,7 +155,7 @@ export default function HorizontalSection({
         <motion.div
           className={`shrink-0 h-full ${color} bg-opacity-100 w-[100vw] py-12 px-24 flex items-center pointer-events-auto border-l border-charcoal/5 relative overflow-hidden`}
         >
-          <motion.div style={{ x: internalX }} className="w-full h-full">
+          <motion.div style={{ x: internalX }} className="flex h-full w-max">
             {children}
           </motion.div>
 
