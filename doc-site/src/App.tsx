@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useTransform, useMotionTemplate } from 'framer-motion';
 import Hero from './components/Hero';
 import HorizontalSection from './components/HorizontalSection';
@@ -17,10 +17,32 @@ const SectionNumber = ({ id, isMobile }: { id: string; isMobile: boolean }) => {
   );
 };
 
+const CopyCommand = ({ command }: { command: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div
+      className="brutalist-card p-10 md:p-14 bg-charcoal text-white inline-block relative group cursor-pointer overflow-hidden transition-all active:scale-95"
+      onClick={handleCopy}
+    >
+      <pre className="font-mono text-fluid-subheading relative z-10">
+        {copied ? 'Copied!' : command}
+      </pre>
+      <div className={`absolute inset-0 bg-crimson transition-transform duration-500 ${copied ? 'translate-y-0' : 'translate-y-full group-hover:translate-y-0'}`} />
+    </div>
+  );
+};
+
 function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
-
+  const [animationComplete, setAnimationComplete] = useState(false);
   // Custom smoothed scroll progress (0-1)
   const scrollProgress = useLerpScroll();
 
@@ -38,10 +60,10 @@ function App() {
       id: '01',
       label: 'SCALES',
       color: 'bg-white',
-      width: 150,
+      width: 125,
       content: (
         <div className="flex w-max h-full items-center">
-          <div className="w-[75vw] h-full flex flex-col justify-center p-12 md:p-24 relative overflow-hidden">
+          <div className="w-[35vw] h-full flex flex-col items-start justify-center text-start">
             <span className="font-sans font-black text-crimson text-fluid-caption tracking-[0.6em] uppercase mb-8 block">
               THE EXHIBITION
             </span>
@@ -75,12 +97,10 @@ function App() {
       id: '02',
       label: 'PLAYGROUND',
       color: 'bg-[#F7F3ED]',
-      width: 170,
+      width: 150,
       content: (
         <div className="flex w-max h-full items-center">
-          <div className="w-[75svw]">
-            <Playground />
-          </div>
+          <Playground />
           <SectionNumber id="02" isMobile={isMobile} />
         </div>
       ),
@@ -96,15 +116,7 @@ function App() {
             <h3 className="text-fluid-subheading font-display font-black mb-12 text-charcoal uppercase tracking-tighter">
               Ready to <span className="text-crimson italic">deploy?</span>
             </h3>
-            <div
-              className="brutalist-card p-10 md:p-14 bg-charcoal text-white inline-block relative group cursor-pointer overflow-hidden transition-all active:scale-95"
-              onClick={() => navigator.clipboard.writeText('npm install text-wind')}
-            >
-              <pre className="font-mono text-fluid-subheading relative z-10">
-                npm install text-wind
-              </pre>
-              <div className="absolute inset-0 bg-crimson translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </div>
+            <CopyCommand command="npm install text-wind" />
           </div>
           <SectionNumber id="03" isMobile={isMobile} />
         </div>
@@ -166,9 +178,9 @@ function App() {
     return (
       <main className="bg-warm-white min-h-screen pb-20">
         <div className="p-8 pb-16">
-          <Hero scrollProgress={scrollProgress} />
+          <Hero scrollProgress={scrollProgress} setAnimationComplete={setAnimationComplete} />
         </div>
-        <div className="flex flex-col">
+        <motion.div animate={{ opacity: animationComplete ? 1 : 0 }} className="flex flex-col">
           {sectionsWithRange.map((section, i) => (
             <HorizontalSection
               key={section.id}
@@ -183,7 +195,7 @@ function App() {
               {section.content}
             </HorizontalSection>
           ))}
-        </div>
+        </motion.div>
       </main>
     );
   }
@@ -200,23 +212,28 @@ function App() {
           style={{ opacity: heroOpacity, paddingRight: heroPaddingRight }}
           className="fixed inset-0 z-0 pl-4 md:pl-16 lg:pl-20"
         >
-          <Hero scrollProgress={scrollProgress} />
+          <Hero scrollProgress={scrollProgress} setAnimationComplete={setAnimationComplete} />
         </motion.div>
-
-        {/* DYNAMIC SECTIONS */}
-        {sectionsWithRange.map((section, i) => (
-          <HorizontalSection
-            key={section.id}
-            {...section}
-            index={i}
-            scrollProgress={scrollProgress}
-            totalSections={sectionsWithRange.length}
-            startProgress={section.range.start}
-            endProgress={section.range.end}
-          >
-            {section.content}
-          </HorizontalSection>
-        ))}
+        <motion.span
+          initial={{ x: 300 }}
+          animate={{ x: animationComplete ? 0 : 300 }}
+          className="fixed h-screen bg-red-500 "
+        >
+          {/* DYNAMIC SECTIONS */}
+          {sectionsWithRange.map((section, i) => (
+            <HorizontalSection
+              key={section.id}
+              {...section}
+              index={i}
+              scrollProgress={scrollProgress}
+              totalSections={sectionsWithRange.length}
+              startProgress={section.range.start}
+              endProgress={section.range.end}
+            >
+              {section.content}
+            </HorizontalSection>
+          ))}
+        </motion.span>
       </div>
     </main>
   );

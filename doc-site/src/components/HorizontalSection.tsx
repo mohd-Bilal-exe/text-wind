@@ -122,7 +122,7 @@ export default function HorizontalSection({
   }
 
   return (
-    <section className="fixed inset-0 h-screen overflow-hidden pointer-events-none">
+    <section className="absolute top-0 right-0 left-0 bottom-0 h-screen w-svw overflow-hidden pointer-events-none">
       <motion.div
         style={{ x: sliceX, zIndex: 10 + index }}
         className="absolute inset-0 h-full flex pointer-events-none"

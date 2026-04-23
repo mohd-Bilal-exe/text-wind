@@ -3,18 +3,26 @@ import { useState, useEffect } from 'react';
 
 const lines = ['HOW DO DESIGNERS', 'DEFINE THE RIGID', 'PRECISION OF THE', 'ARCHITECTURAL GRID?'];
 
-export default function Hero({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
+export default function Hero({
+  scrollProgress,
+  setAnimationComplete,
+}: {
+  scrollProgress: MotionValue<number>;
+  setAnimationComplete: (value: boolean) => void;
+}) {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 1200);
     const t2 = setTimeout(() => setPhase(2), 2800);
     const t3 = setTimeout(() => setPhase(3), 4200);
+    const t4 = setTimeout(() => setAnimationComplete(true), 4300);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
+      clearTimeout(t4);
     };
   }, []);
 
@@ -28,7 +36,7 @@ export default function Hero({ scrollProgress }: { scrollProgress: MotionValue<n
       initial={{ scale: 3.5, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
-      className="relative w-full h-svh flex flex-col bg-warm-white overflow-hidden select-none"
+      className="relative w-full h-svh flex flex-col bg-warm-white  select-none"
     >
       {/* 0. ABSOLUTE METADATA (Top Right - Matching the small paragraph in image) */}
       <motion.div
@@ -38,9 +46,10 @@ export default function Hero({ scrollProgress }: { scrollProgress: MotionValue<n
       >
         <div className="flex flex-col gap-0 border-l border-crimson pl-4">
           <p>
-            Textwind is the architectural foundation for modern web typography. By eliminating the
-            friction of manual breakpoints, it enables a mathematical harmony between viewport and
-            scale, ensuring your design vision remains uncompromised on every screen.
+            <span className="text-crimson font-bold">Textwind</span> is the architectural foundation
+            for modern web typography. By eliminating the friction of manual breakpoints, it enables
+            a mathematical harmony between viewport and scale, ensuring your design vision remains
+            uncompromised on every screen.
           </p>
         </div>
       </motion.div>
@@ -73,7 +82,7 @@ export default function Hero({ scrollProgress }: { scrollProgress: MotionValue<n
                     }}
                     className={`inline-block font-display leading-[0.85]  font-black uppercase ${
                       word === 'DESIGNERS' ? 'text-crimson' : 'text-charcoal'
-                    } text-[8vw] md:text-[6vw]`}
+                    } text-[6vw] md:text-[7vw]`}
                   >
                     {char}
                   </motion.span>
@@ -97,14 +106,14 @@ export default function Hero({ scrollProgress }: { scrollProgress: MotionValue<n
           {'TEXTWIND'.split('').map((char, index) => (
             <motion.span
               key={index}
-              initial={{ y: '115%' }}
-              animate={phase >= 2 ? { y: 0 } : { y: '115%' }}
+              initial={{ y: '130%' }}
+              animate={phase >= 2 ? { y: 0 } : { y: '130%' }}
               transition={{
                 delay: index * 0.05,
                 duration: 1.2,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="text-[10vw] leading-[0.7] font-display font-black text-charcoal tracking-[-0.04em] uppercase inline-block select-none"
+              className="text-[10vw] leading-[0.7] font-display font-black text-charcoal tracking-[-0.02em] uppercase inline-block select-none"
             >
               {char}
             </motion.span>
