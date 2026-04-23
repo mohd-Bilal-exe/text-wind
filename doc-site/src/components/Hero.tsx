@@ -1,5 +1,6 @@
 import { motion, useTransform, MotionValue } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { useMediaQuery } from '../hooks/use-media-query';
 
 const lines = ['HOW DO DESIGNERS', 'DEFINE THE RIGID', 'PRECISION OF THE', 'ARCHITECTURAL GRID?'];
 
@@ -11,7 +12,7 @@ export default function Hero({
   setAnimationComplete: (value: boolean) => void;
 }) {
   const [phase, setPhase] = useState(0);
-
+  const isMobile = useMediaQuery('(max-width: 768px)');
   useEffect(() => {
     const t1 = setTimeout(() => setPhase(1), 1200);
     const t2 = setTimeout(() => setPhase(2), 2800);
@@ -31,6 +32,105 @@ export default function Hero({
   const titleScale = useTransform(scrollProgress, [0, 0.08], [0.93, 0.43]);
   const phraseOpacity = useTransform(scrollProgress, [0.05, 0.12], [1, 0.2]);
 
+  if (isMobile) {
+    return (
+      <motion.div
+        initial={{ scale: 2, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
+        className="relative w-full h-[85svh] flex flex-col bg-warm-white select-none overflow-hidden"
+      >
+        {/* 0. ABSOLUTE METADATA (Top Left for Mobile) */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={phase >= 2 ? { opacity: 0.8, y: 0 } : { opacity: 0, y: -10 }}
+          className="absolute top-4 left-4 text-left max-w-[70%] font-sans text-[10px] sm:text-xs leading-relaxed tracking-tight text-charcoal z-20 pointer-events-none"
+        >
+          <div className="flex flex-col gap-0 border-l border-crimson pl-3">
+            <p>
+              <span className="text-crimson font-bold">Textwind</span> is the architectural
+              foundation for modern web typography. Ensuring your vision remains uncompromised.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* 1. THE PHRASE (Mobile Centered) */}
+        <motion.div
+          initial={{ scale: 1, y: '25svh', x: '5%' }}
+          animate={
+            phase >= 2 ? { scale: 0.6, y: '12svh', x: '5%' } : { scale: 1, y: '25svh', x: '5%' }
+          }
+          transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
+          style={{ transformOrigin: 'left top', opacity: phraseOpacity }}
+          className="absolute z-10 w-max flex flex-col items-start pointer-events-none"
+        >
+          {lines.map((line, lineIndex) => (
+            <div key={lineIndex} className="flex whitespace-nowrap">
+              {line.split(' ').map((word, wordIndex) => (
+                <div key={wordIndex} className="inline-flex mr-[2em] tracking-tighter">
+                  {word.split('').map((char, charIndex) => (
+                    <motion.span
+                      key={charIndex}
+                      initial={{ y: '110%' }}
+                      animate={{ y: 0 }}
+                      transition={{
+                        delay: lineIndex * 0.1 + wordIndex * 0.05 + charIndex * 0.01,
+                        duration: 0.8,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className={`inline-block font-display leading-[0.85] font-black uppercase ${
+                        word === 'DESIGNERS' ? 'text-crimson' : 'text-charcoal'
+                      } text-[9vw] sm:text-[7vw]`}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* 2. THE MAIN TITLE (TEXTWIND) */}
+        <motion.div
+          style={{
+            opacity: globalOpacity,
+            scale: titleScale,
+            transformOrigin: 'left bottom',
+          }}
+          className="absolute bottom-[5svh] left-0 w-full flex justify-between pointer-events-none z-0 px-4"
+        >
+          <div className="flex w-full justify-between items-end overflow-hidden pt-8 pb-2">
+            {'TEXTWIND'.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ y: '130%' }}
+                animate={phase >= 2 ? { y: 0 } : { y: '130%' }}
+                transition={{
+                  delay: index * 0.05,
+                  duration: 1.2,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="text-[12vw] leading-[0.7] font-display font-black text-charcoal tracking-[-0.02em] uppercase inline-block select-none"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Background Hint (Bottom Right) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={phase >= 3 ? { opacity: 0.15 } : { opacity: 0 }}
+          className="absolute bottom-4 right-4 font-mono font-bold text-[8px] pointer-events-none z-[-1] flex flex-col items-end"
+        >
+          <span className="text-crimson">§00</span>
+          <span className="tracking-[0.4em] opacity-50">CORE_INIT</span>
+        </motion.div>
+      </motion.div>
+    );
+  }
   return (
     <motion.div
       initial={{ scale: 3.5, opacity: 0 }}
@@ -42,7 +142,7 @@ export default function Hero({
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={phase >= 2 ? { opacity: 0.8, y: 0 } : { opacity: 0, y: -20 }}
-        className="absolute top-12 right-24 text-left max-w-sm font-sans text-[11px] leading-relaxed tracking-tight text-charcoal z-20 pointer-events-none"
+        className="absolute top-12 right-44 text-left max-w-sm font-sans text-fluid-body/59 leading-relaxed tracking-tight text-charcoal z-20 pointer-events-none"
       >
         <div className="flex flex-col gap-0 border-l border-crimson pl-4">
           <p>
@@ -102,7 +202,7 @@ export default function Hero({
         }}
         className="absolute bottom-[-2vh] left-0 w-full flex justify-between pointer-events-none z-0 "
       >
-        <div className="flex w-full justify-between items-end overflow-hidden pt-12 pb-4">
+        <div className="flex w-[92%] justify-between items-end overflow-hidden pt-12 pb-4">
           {'TEXTWIND'.split('').map((char, index) => (
             <motion.span
               key={index}

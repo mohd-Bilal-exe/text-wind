@@ -1,25 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "text-wind";
 
 @theme {
-  --color-crimson: #DC143C;
-  --color-warm-white: #FDF9F3;
-  --color-charcoal: #1C1C18;
-  
-  --font-display: "Newsreader", serif;
-  --font-sans: "Inter", sans-serif;
-  
+  --color-crimson: #dc143c;
+  --color-warm-white: #fdf9f3;
+  --color-charcoal: #1c1c18;
+
+  --font-display: 'Newsreader', serif;
+  --font-sans: 'Inter', sans-serif;
+
   --shadow-brutalist: 4px 4px 0px var(--color-charcoal);
-  
+
   /* Fluidwind Base Variables */
   --fluid-vw-min: 320px;
   --fluid-vw-max: 1280px;
-  
+
   /* Default Fluidwind Type Configs */
   --fluid-heading-min: 3rem;
   --fluid-heading-max: 8rem;
   --fluid-heading-weight: 800;
-  
+
   --fluid-body-min: 1rem;
   --fluid-body-max: 1.25rem;
 }
@@ -28,13 +28,15 @@
   * {
     @apply border-charcoal;
   }
-  
+
   body {
     @apply bg-warm-white text-charcoal font-sans antialiased scroll-smooth;
     margin: 0;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     @apply font-display tracking-tight;
   }
 }
@@ -43,22 +45,45 @@
   .brutalist-card {
     @apply border-2 bg-white shadow-brutalist transition-all duration-200;
   }
-  
+
   .brutalist-card:active {
     @apply shadow-none translate-x-[2px] translate-y-[2px];
   }
-  
+
   .stack-container {
     @apply flex flex-nowrap overflow-x-auto h-svh snap-x snap-mandatory;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .stack-container::-webkit-scrollbar {
     display: none;
   }
 
   .stack-section {
-    @apply min-w-full h-full flex-shrink-0 snap-start sticky left-0 border-r-2 bg-warm-white p-8 md:p-16 flex flex-col justify-center;
+    @apply min-w-full h-full shrink-0 snap-start sticky left-0 border-r-2 bg-warm-white p-8 md:p-16 flex flex-col justify-center;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-visible::-webkit-scrollbar {
+  display: block;
+  width: 4px;
+}
+.scrollbar-visible::-webkit-scrollbar-track {
+  display: block;
+  background-color: var(--color-warm-white);
+}
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  display: block;
+  background-color: var(--color-crimson);
+}
+.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-crimson);
+}
+.scrollbar-visible::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-crimson);
 }
