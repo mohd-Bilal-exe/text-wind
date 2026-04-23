@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import SectionNumber from './SectionNumber';
+import { useMediaQuery } from '../../hooks/use-media-query';
 
-export default function SetupSection({ isMobile = false }: { isMobile: boolean }) {
+export default function SetupSection({ isMobile: isMobileProp = false }: { isMobile?: boolean }) {
+  const isMobileHook = useMediaQuery('(max-width: 768px)');
+  const isMobile = isMobileProp || isMobileHook;
+
   const steps = [
     {
       title: 'INSTALLATION',
@@ -19,6 +23,44 @@ export default function SetupSection({ isMobile = false }: { isMobile: boolean }
       command: '--fluid-heading-min: 2rem;',
     },
   ];
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col w-full h-auto p-12 items-start justify-center">
+        <div className="flex flex-col mb-16">
+          <span className="font-sans font-black text-crimson text-fluid-caption tracking-[0.6em] uppercase mb-8 block text-start">
+            HOW TO USE
+          </span>
+          <h2 className="text-fluid-heading leading-[0.75] font-display font-black text-charcoal tracking-[-0.08em] uppercase mb-12 text-start">
+            Setup <span className="text-crimson italic">Process</span>
+          </h2>
+          <p className="text-fluid-body font-medium text-charcoal/60 leading-relaxed text-start max-w-sm">
+            Textwind is designed to be plug-and-play. Follow these three stages to integrate fluid typography.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-12 w-full">
+          {steps.map((step, index) => (
+            <div key={index} className="flex flex-col w-full">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-crimson font-display font-black text-fluid-subheading italic leading-none">
+                  {index + 1}.
+                </span>
+                <div className="h-[2px] grow bg-charcoal/10" />
+              </div>
+              <h3 className="font-display font-black text-fluid-caption tracking-[0.2em] uppercase mb-3 text-charcoal">
+                {step.title}
+              </h3>
+              <p className="text-fluid-caption font-medium text-charcoal/50 mb-6 max-w-xs">
+                {step.description}
+              </p>
+              <CopyBlock command={step.command} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-max h-full items-center">

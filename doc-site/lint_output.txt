@@ -1,0 +1,28 @@
+
+> doc-site@1.7.0 lint
+> eslint .
+
+
+C:\Users\LOQ\Desktop\Code\my-project\fluidwind\doc-site\src\components\Hero.tsx
+  27:6  warning  React Hook useEffect has a missing dependency: 'setAnimationComplete'. Either include it or remove the dependency array. If 'setAnimationComplete' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+C:\Users\LOQ\Desktop\Code\my-project\fluidwind\doc-site\src\hooks\use-media-query.ts
+  13:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\LOQ\Desktop\Code\my-project\fluidwind\doc-site\src\hooks\use-media-query.ts:13:7
+  11 |     const media = window.matchMedia(query);
+  12 |     if (media.matches !== matches) {
+> 13 |       setMatches(media.matches);
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  14 |     }
+  15 |     const listener = () => setMatches(media.matches);
+  16 |     media.addEventListener('change', listener);  react-hooks/set-state-in-effect
+
+Γ£û 2 problems (1 error, 1 warning)
+

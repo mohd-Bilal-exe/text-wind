@@ -1,6 +1,10 @@
 import SectionNumber from './SectionNumber';
+import { useMediaQuery } from '../../hooks/use-media-query';
 
-export default function ReferenceSection({ isMobile = false }: { isMobile: boolean }) {
+export default function ReferenceSection({ isMobile: isMobileProp = false }: { isMobile?: boolean }) {
+  const isMobileHook = useMediaQuery('(max-width: 768px)');
+  const isMobile = isMobileProp || isMobileHook;
+
   const categories = [
     {
       name: 'FLUID TYPES',
@@ -46,6 +50,58 @@ export default function ReferenceSection({ isMobile = false }: { isMobile: boole
     { var: '--fluid-heading-min', val: '3rem', desc: 'Heading min' },
     { var: '--fluid-body-min', val: '1rem', desc: 'Body min' },
   ];
+
+  if (isMobile) {
+    return (
+      <div className="flex flex-col w-full h-auto p-12 items-start justify-center">
+        <div className="flex flex-col mb-16">
+          <span className="font-sans font-black text-crimson text-fluid-caption tracking-[0.6em] uppercase mb-8 block text-start">
+            REFERENCE
+          </span>
+          <h2 className="text-fluid-heading leading-[0.75] font-display font-black text-charcoal tracking-[-0.08em] uppercase mb-12 text-start">
+            System <span className="text-crimson italic">Registry</span>
+          </h2>
+          <div className="space-y-6">
+            <div className="p-6 bg-charcoal text-white rounded-sm border-l-4 border-crimson">
+              <span className="text-[10px] font-mono opacity-50 block mb-4 uppercase">
+                CORE VARIABLES
+              </span>
+              <div className="grid grid-cols-1 gap-3">
+                {customizationVars.map((v, i) => (
+                  <div key={i} className="flex justify-between items-center gap-4">
+                    <code className="text-[10px] text-crimson font-bold">{v.var}</code>
+                    <span className="text-[10px] opacity-40 font-mono italic">{v.val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-16 w-full">
+          {categories.map((cat, i) => (
+            <div key={i} className="flex flex-col">
+              <h3 className="font-display font-black text-fluid-caption tracking-[0.2em] uppercase mb-8 text-crimson pb-2 border-b border-crimson/20">
+                {cat.name}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                {cat.items.map((item, j) => (
+                  <div key={j} className="group">
+                    <code className="text-fluid-caption font-mono font-bold text-charcoal group-hover:text-crimson transition-colors block mb-1">
+                      {item.class.startsWith('.') ? item.class : `.${item.class}`}
+                    </code>
+                    <small className="text-[11px] font-sans font-medium text-charcoal/40 uppercase tracking-tighter block leading-tight">
+                      {item.desc}
+                    </small>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-max h-full items-center">
