@@ -1,6 +1,7 @@
 import { motion, useTransform, MotionValue } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from '../hooks/use-media-query';
+import AppLogo from './ui/AppLogo';
 
 const lines = ['HOW DO DESIGNERS', 'DEFINE THE RIGID', 'PRECISION OF THE', 'ARCHITECTURAL GRID?'];
 

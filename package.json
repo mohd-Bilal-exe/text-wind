@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/mohd-Bilal-exe/fluidwind/issues"
   },
-  "homepage": "https://github.com/mohd-Bilal-exe/fluidwind#readme",
+  "homepage": "https://textwind.vercel.app",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

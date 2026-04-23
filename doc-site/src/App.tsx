@@ -12,6 +12,7 @@ import FourthSection from './components/SECTIONS/FourthSection';
 import FinSection from './components/SECTIONS/FinSection';
 import SetupSection from './components/SECTIONS/SetupSection';
 import ReferenceSection from './components/SECTIONS/ReferenceSection';
+import Sidebar from './components/ui/Sidebar';
 
 function App() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -125,6 +126,7 @@ function App() {
       ref={containerRef}
       className={`relative bg-warm-white ${animationComplete ? 'h-[800vh]' : 'h-screen overflow-hidden'} overflow-x-hidden selection:bg-crimson selection:text-white scrollbar-hide`}
     >
+      <Sidebar />
       {/* STICKY STACK CONTAINER */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* HERO CONTENT - Changed to fixed to prevent vertical scroll */}

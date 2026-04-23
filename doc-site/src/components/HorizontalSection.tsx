@@ -122,7 +122,7 @@ export default function HorizontalSection({
   }
 
   return (
-    <section className="absolute top-0 right-0 left-0 bottom-0 h-screen w-svw overflow-hidden pointer-events-none">
+    <section className="absolute top-0 right-0 left-12 bottom-0 h-screen w-svw overflow-hidden pointer-events-none">
       <motion.div
         style={{ x: sliceX, zIndex: 10 + index }}
         className="absolute inset-0 h-full flex pointer-events-none"
@@ -130,7 +130,7 @@ export default function HorizontalSection({
         {/* Ribbon - Anchors to the moving section wrapper */}
         <motion.div
           style={{ width: currentRibbonWidth }}
-          className={`shrink-0 h-full border-l border-r border-charcoal/10 flex flex-col items-center justify-start py-12 ${color} bg-opacity-100 shadow-xl pointer-events-auto relative overflow-hidden transition-all duration-300`}
+          className={`shrink-0 h-full border-l border-r border-charcoal/10 flex flex-col items-center justify-start py-12 ${color} bg-opacity-10  backdrop-blur-sm shadow-xl pointer-events-auto relative overflow-hidden transition-all duration-300`}
         >
           {/* Active Indicator (Asterisk) */}
           <motion.div
@@ -153,7 +153,7 @@ export default function HorizontalSection({
 
         {/* Content Area - Moves with the section, but its inner layer scrolls more */}
         <motion.div
-          className={`shrink-0 h-full ${color} bg-opacity-100 w-[100vw] py-12 px-24 flex items-center pointer-events-auto border-l border-charcoal/5 relative overflow-hidden`}
+          className={`shrink-0 h-full ${color} bg-opacity-100 w-svw py-12 px-24 flex items-center pointer-events-auto border-l border-charcoal/5 relative overflow-hidden`}
         >
           <motion.div style={{ x: internalX }} className="flex h-full w-max">
             {children}
