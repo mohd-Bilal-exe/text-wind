@@ -1,5 +1,7 @@
 @import 'tailwindcss';
-@plugin "text-wind";
+@plugin "text-wind" {
+  easing: 'in-out';
+}
 
 @theme {
   --color-crimson: #dc143c;
@@ -17,11 +19,22 @@
 
   /* Default Fluidwind Type Configs */
   --fluid-heading-min: 3rem;
-  --fluid-heading-max: 8rem;
+  --fluid-heading-max: 111rem;
   --fluid-heading-weight: 800;
 
   --fluid-body-min: 1rem;
   --fluid-body-max: 1.25rem;
+
+  --fluid-subheading-min: 2rem;
+  --fluid-subheading-max: 4rem;
+  --fluid-subheading-weight: 800;
+
+  --fluid-caption-min: 0.875rem;
+  --fluid-caption-max: 1rem;
+  --fluid-caption-weight: 700;
+}
+@plugin "text-wind" {
+  easing: 'in-out';
 }
 
 @layer base {

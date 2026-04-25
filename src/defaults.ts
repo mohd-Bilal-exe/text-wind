@@ -14,6 +14,7 @@ export const DEFAULT_TEXT_TYPE_TEMPLATE: FluidTextTypeConfig = {
   maxLineHeight: 1.4,
   weight: 400,
   letterSpacing: '0em',
+  easing: 'linear',
 };
 
 export const DEFAULT_TEXT_TYPES: Record<string, FluidTextTypeConfig> = {
@@ -138,6 +139,113 @@ export const DEFAULT_COLORS: Record<string, string> = {
   code: 'var(--color-fluid-body)',
 };
 
+export const DEFAULT_BASE_VARIABLES: Record<string, string> = {
+  '--fluid-vw-min': '320px',
+  '--fluid-vw-max': '1536px',
+
+  /* Display */
+  '--fluid-display-min': '3.5rem',
+  '--fluid-display-max': '10rem',
+  '--fluid-display-lh-min': '1.1',
+  '--fluid-display-lh-max': '1.05',
+  '--fluid-display-weight': '800',
+  '--fluid-display-tracking': '-0.02em',
+
+  /* Heading */
+  '--fluid-heading-min': '2.5rem',
+  '--fluid-heading-max': '5rem',
+  '--fluid-heading-lh-min': '1.2',
+  '--fluid-heading-lh-max': '1.1',
+  '--fluid-heading-weight': '700',
+  '--fluid-heading-tracking': '-0.01em',
+
+  /* Subheading */
+  '--fluid-subheading-min': '1.5rem',
+  '--fluid-subheading-max': '2.5rem',
+  '--fluid-subheading-lh-min': '1.3',
+  '--fluid-subheading-lh-max': '1.2',
+  '--fluid-subheading-weight': '600',
+  '--fluid-subheading-tracking': '0em',
+
+  /* Title */
+  '--fluid-title-min': '1.25rem',
+  '--fluid-title-max': '1.75rem',
+  '--fluid-title-lh-min': '1.4',
+  '--fluid-title-lh-max': '1.3',
+  '--fluid-title-weight': '600',
+  '--fluid-title-tracking': '0em',
+
+  /* Body */
+  '--fluid-body-min': '1rem',
+  '--fluid-body-max': '1.125rem',
+  '--fluid-body-lh-min': '1.6',
+  '--fluid-body-lh-max': '1.55',
+  '--fluid-body-weight': '400',
+  '--fluid-body-tracking': '0em',
+
+  /* Label */
+  '--fluid-label-min': '0.875rem',
+  '--fluid-label-max': '1rem',
+  '--fluid-label-lh-min': '1.5',
+  '--fluid-label-lh-max': '1.4',
+  '--fluid-label-weight': '500',
+  '--fluid-label-tracking': '0.01em',
+
+  /* Callout */
+  '--fluid-callout-min': '1rem',
+  '--fluid-callout-max': '1.125rem',
+  '--fluid-callout-lh-min': '1.5',
+  '--fluid-callout-lh-max': '1.4',
+  '--fluid-callout-weight': '500',
+  '--fluid-callout-tracking': '0em',
+
+  /* Caption */
+  '--fluid-caption-min': '0.75rem',
+  '--fluid-caption-max': '0.875rem',
+  '--fluid-caption-lh-min': '1.4',
+  '--fluid-caption-lh-max': '1.3',
+  '--fluid-caption-weight': '400',
+  '--fluid-caption-tracking': '0em',
+
+  /* Overline */
+  '--fluid-overline-min': '0.75rem',
+  '--fluid-overline-max': '0.875rem',
+  '--fluid-overline-lh-min': '1.2',
+  '--fluid-overline-lh-max': '1.2',
+  '--fluid-overline-weight': '700',
+  '--fluid-overline-tracking': '0.1em',
+
+  /* Footnote */
+  '--fluid-footnote-min': '0.75rem',
+  '--fluid-footnote-max': '0.8125rem',
+  '--fluid-footnote-lh-min': '1.3',
+  '--fluid-footnote-lh-max': '1.3',
+  '--fluid-footnote-weight': '400',
+  '--fluid-footnote-tracking': '0em',
+
+  /* Code */
+  '--fluid-code-min': '0.875rem',
+  '--fluid-code-max': '1rem',
+  '--fluid-code-lh-min': '1.5',
+  '--fluid-code-lh-max': '1.5',
+  '--fluid-code-weight': '400',
+  '--fluid-code-tracking': '0em',
+
+  /* Colors */
+  '--color-fluid-heading': '#111827',
+  '--color-fluid-subheading': '#4b5563',
+  '--color-fluid-body': '#374151',
+  '--color-fluid-muted': '#6b7280',
+  '--color-fluid-accent': '#2563eb',
+
+  /* Font Families */
+  '--font-family-display': 'system-ui, sans-serif',
+  '--font-family-heading': 'system-ui, sans-serif',
+  '--font-family-subheading': 'system-ui, sans-serif',
+  '--font-family-body': 'system-ui, sans-serif',
+  '--font-family-mono': 'ui-monospace, monospace',
+};
+
 export const DEFAULT_TEXTWIND_OPTIONS: ResolvedTextwindOptions = {
   scales: DEFAULT_SCALES,
   viewportMin: DEFAULT_VIEWPORT_MIN,
@@ -146,4 +254,5 @@ export const DEFAULT_TEXTWIND_OPTIONS: ResolvedTextwindOptions = {
   fontFamilies: DEFAULT_FONT_FAMILIES,
   colors: DEFAULT_COLORS,
   opacitySteps: DEFAULT_OPACITY_STEPS,
+  easing: 'linear',
 };

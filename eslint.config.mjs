@@ -11,6 +11,7 @@ export default tseslint.config(
   {
     ignores: ['dist/**', 'node_modules/**'],
   },
+  tseslint.configs.recommended,
   {
     files: ['src/**/*.ts', 'tests/**/*.ts'],
     languageOptions: {

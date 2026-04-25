@@ -9,5 +9,6 @@ The plugin accepts overrides for:
 - `fontFamilies`
 - `colors`
 - `opacitySteps`
+- `easing`
 
 Use this when you want to pre-generate a tighter scale or add custom semantic text types.

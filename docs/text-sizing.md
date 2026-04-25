@@ -22,3 +22,20 @@ Use inline scale modifiers for quick adjustments:
 ```
 
 The scale changes font size, line-height, and letter-spacing together.
+
+## Fluid Curvature (Easing)
+
+By default, text scales **linearly** between viewports. You can change this "curvature" to make growth more dramatic or smooth using the `easing` option:
+
+- `linear`: Standard linear scaling (Default)
+- `in`: Starts slow, ends fast (Quadratic)
+- `out`: Starts fast, ends slow (Quadratic)
+- `in-out`: Smooth start and end (Smoothstep)
+
+Configure it in your Tailwind config or CSS:
+
+```css
+@plugin "text-wind" {
+  easing: "in-out"
+}
+```

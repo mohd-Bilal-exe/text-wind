@@ -1,0 +1,12 @@
+
+> text-wind@1.7.0 lint
+> eslint "src/**/*.ts" "tests/**/*.ts"
+
+
+C:\Users\LOQ\Desktop\Code\my-project\fluidwind\src\index.ts
+  131:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  153:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  165:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 3 problems (3 errors, 0 warnings)
+

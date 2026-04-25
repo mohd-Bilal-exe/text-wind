@@ -1,4 +1,4 @@
-import type { CssPrimitive } from '../types';
+import type { CssPrimitive, EasingCurve } from '../types';
 
 export function formatDecimal(value: number): string {
   if (!Number.isFinite(value)) {
@@ -95,11 +95,30 @@ export function scaledCalc(value: string, factor: number): string {
   return `calc(${value} * ${formatDecimal(factor)})`;
 }
 
-export function buildFluidClamp(min: string, max: string, viewportMin: string, viewportMax: string, factor: number): string {
+export function buildFluidClamp(
+  min: string,
+  max: string,
+  viewportMin: string,
+  viewportMax: string,
+  factor: number,
+  easing: EasingCurve = 'linear',
+): string {
   const scaledMin = scaledCalc(min, factor);
   const scaledMax = scaledCalc(max, factor);
 
-  return `clamp(${scaledMin}, calc(${scaledMin} + (${scaledMax} - ${scaledMin}) * ((100vw - ${viewportMin}) / (${viewportMax} - ${viewportMin}))), ${scaledMax})`;
+  const p = `((100vw - ${viewportMin}) / (${viewportMax} - ${viewportMin}))`;
+
+  let easedP = p;
+
+  if (easing === 'in') {
+    easedP = `(${p} * ${p})`;
+  } else if (easing === 'out') {
+    easedP = `(1 - (1 - ${p}) * (1 - ${p}))`;
+  } else if (easing === 'in-out') {
+    easedP = `(${p} * ${p} * (3 - 2 * ${p}))`;
+  }
+
+  return `clamp(${scaledMin}, calc(${scaledMin} + (${scaledMax} - ${scaledMin}) * ${easedP}), ${scaledMax})`;
 }
 
 export function buildOpacityColor(color: string, opacity: number): string {

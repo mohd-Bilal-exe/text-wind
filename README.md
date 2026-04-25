@@ -12,6 +12,7 @@ Textwind gives you fluid sizing, font family utilities, color utilities, and opt
 - **Hierarchical Font Families**: Consistent tokens for all 11 types
 - **Systematic Colors**: Core tokens like `heading`, `body`, `muted`, `accent`, and `callout`
 - Optical tracking that scales with the text size
+- **Non-linear easing support**: Custom curvature for fluid growth (`linear`, `in`, `out`, `in-out`)
 - Tailwind CSS v3.4+ and v4.x compatible
 
 ## Install

@@ -36,13 +36,14 @@ export function generateFluidTextDeclarations(
   const scale = normalizeScaleModifier(scaleModifier);
 
   return {
-    fontSize: buildFluidClamp(type.minSize, type.maxSize, viewport.min, viewport.max, scale),
+    fontSize: buildFluidClamp(type.minSize, type.maxSize, viewport.min, viewport.max, scale, options?.easing ?? type.easing),
     lineHeight: buildFluidClamp(
       toCssValue(type.minLineHeight),
       toCssValue(type.maxLineHeight),
       viewport.min,
       viewport.max,
       scale,
+      options?.easing ?? type.easing,
     ),
     fontWeight: toCssValue(type.weight),
     letterSpacing: scale === 1 ? type.letterSpacing : `calc(${type.letterSpacing} * ${formatDecimal(scale)})`,

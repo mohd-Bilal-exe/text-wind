@@ -12,7 +12,7 @@ export default function FourthSection({ isMobile: isMobileProp = false }: { isMo
           SARTORIAL <span className="text-crimson">CODE.</span>
         </h3>
         <p className="font-sans text-fluid-body leading-relaxed text-charcoal/70 max-w-sm text-start">
-          Textwind is the result of thousands of hours spent perfecting architectural type scales.
+          Textwind is the result of tens of hours spent perfecting architectural type scales.
         </p>
       </div>
     );
@@ -24,7 +24,7 @@ export default function FourthSection({ isMobile: isMobileProp = false }: { isMo
           SARTORIAL <span className="text-crimson">CODE.</span>
         </h3>
         <p className="font-sans text-fluid-body leading-relaxed text-charcoal/70 max-w-md">
-          Textwind is the result of thousands of hours spent perfecting architectural type scales.
+          Textwind is the result of tens of hours spent perfecting architectural type scales.
         </p>
       </div>
       <SectionNumber id="06" isMobile={isMobile} />

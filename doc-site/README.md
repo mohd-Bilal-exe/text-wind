@@ -6,6 +6,7 @@ This is the interactive documentation and reference site for Textwind.
 
 - **Interactive Registry**: Live preview of all 11 fluid typography types.
 - **Modifier Testing**: Visual test suite for scale and opacity modifiers.
+- **Fluid Curvature (Easing)**: Support for `linear`, `in`, `out`, and `in-out` scaling.
 - **Design System Reference**: Technical details on variables and tokens.
 
 ## Development

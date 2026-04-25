@@ -35,7 +35,8 @@ export default function SetupSection({ isMobile: isMobileProp = false }: { isMob
             Setup <span className="text-crimson italic">Process</span>
           </h2>
           <p className="text-fluid-body font-medium text-charcoal/60 leading-relaxed text-start max-w-sm">
-            Textwind is designed to be plug-and-play. Follow these three stages to integrate fluid typography.
+            Textwind is designed to be plug-and-play. Follow these three stages to integrate fluid
+            typography.
           </p>
         </div>
 
@@ -73,7 +74,8 @@ export default function SetupSection({ isMobile: isMobileProp = false }: { isMob
             Setup <span className="text-crimson italic">Process</span>
           </h2>
           <p className="text-fluid-body font-medium text-charcoal/60 leading-relaxed">
-            Textwind is designed to be plug-and-play. Follow these three stages to integrate fluid typography into your architectural workflow.
+            Textwind is designed to be plug-and-play. Follow these three stages to integrate fluid
+            typography into your architectural workflow.
           </p>
         </div>
 
@@ -102,7 +104,7 @@ export default function SetupSection({ isMobile: isMobileProp = false }: { isMob
   );
 }
 
-const CopyBlock = ({ command }: { command: string }) => {
+export const CopyBlock = ({ command }: { command: string }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

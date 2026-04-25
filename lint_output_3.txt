@@ -1,0 +1,14 @@
+
+> text-wind@1.7.0 lint
+> eslint "src/**/*.ts" "tests/**/*.ts"
+
+
+C:\Users\LOQ\Desktop\Code\my-project\fluidwind\src\index.ts
+  153:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+  157:14  error    Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+  166:9   warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+  170:14  error    Unexpected any. Specify a different type                                                               @typescript-eslint/no-explicit-any
+
+Γ£û 4 problems (2 errors, 2 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+

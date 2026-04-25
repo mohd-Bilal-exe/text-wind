@@ -1,5 +1,12 @@
 import plugin from 'tailwindcss/plugin';
-import { DEFAULT_COLORS, DEFAULT_FONT_FAMILIES, DEFAULT_OPACITY_STEPS, DEFAULT_SCALES, DEFAULT_TEXT_TYPES } from './defaults';
+import {
+  DEFAULT_BASE_VARIABLES,
+  DEFAULT_COLORS,
+  DEFAULT_FONT_FAMILIES,
+  DEFAULT_OPACITY_STEPS,
+  DEFAULT_SCALES,
+  DEFAULT_TEXT_TYPES,
+} from './defaults';
 import { generateColorDeclarations, generateColorCSS } from './generators/colors';
 import { generateFontFamilyDeclarations, generateFontFamilyCSS } from './generators/font-family';
 import { generateFluidTextDeclarations, generateFluidTextCSS } from './generators/text-sizing';
@@ -57,6 +64,7 @@ function normalizeTextTypeConfig(
     maxLineHeight: 1.4,
     weight: 400,
     letterSpacing: '0em',
+    easing: 'linear',
   };
 
   return {
@@ -66,7 +74,9 @@ function normalizeTextTypeConfig(
 }
 
 function resolveOptions(options: TextwindOptions = {}): ResolvedTextwindOptions {
-  const scales = (options.scales?.length ? options.scales : DEFAULT_SCALES).map((value) => Number(value)).filter((value) => Number.isFinite(value));
+  const scales = (options.scales?.length ? options.scales : DEFAULT_SCALES)
+    .map((value) => Number(value))
+    .filter((value) => Number.isFinite(value));
   const opacitySteps = (options.opacitySteps?.length ? options.opacitySteps : DEFAULT_OPACITY_STEPS)
     .map((value) => Number(value))
     .filter((value) => Number.isFinite(value));
@@ -101,6 +111,7 @@ function resolveOptions(options: TextwindOptions = {}): ResolvedTextwindOptions 
     textTypes,
     fontFamilies,
     colors,
+    easing: options.easing ?? 'linear',
   };
 }
 
@@ -113,46 +124,54 @@ function buildFontFamilyUtilities(resolved: ResolvedTextwindOptions): Record<str
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const textwind: any = plugin.withOptions<TextwindOptions>(
   (options = {}) => {
     const resolved = resolveOptions(options);
     const utilities = buildFontFamilyUtilities(resolved);
 
-    return ({ addUtilities, matchUtilities }: any) => {
+    // Using any here as Tailwind's internal API types are complex and vary between versions
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return ({ addBase, addUtilities, matchUtilities }: any) => {
+      // Inject default fluid variables into :root
+      addBase({
+        ':root': DEFAULT_BASE_VARIABLES,
+      });
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       addUtilities(utilities as any);
 
       for (const [typeName, typeConfig] of Object.entries(resolved.textTypes)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const matchers: any = {
           [`text-fluid-${typeName}`]: (_value: string, { modifier }: { modifier: string | null }) =>
             generateFluidTextDeclarations(typeName, modifier ?? 1, {
               type: typeConfig,
               viewportMin: resolved.viewportMin,
               viewportMax: resolved.viewportMax,
+              easing: resolved.easing,
             }),
         };
 
-        matchUtilities(
-          matchers,
-          {
-            values: { DEFAULT: '' },
-            modifiers: 'any',
-          } as any,
-        );
+        matchUtilities(matchers, {
+          values: { DEFAULT: '' },
+          modifiers: 'any',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any);
       }
 
       for (const [name, color] of Object.entries(resolved.colors)) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const matchers: any = {
           [`text-${name}-color`]: (_value: string, { modifier }: { modifier: string | null }) =>
             generateColorDeclarations(name, modifier ?? 1, { color }),
         };
 
-        matchUtilities(
-          matchers,
-          {
-            values: { DEFAULT: '' },
-            modifiers: 'any',
-          } as any,
-        );
+        matchUtilities(matchers, {
+          values: { DEFAULT: '' },
+          modifiers: 'any',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any);
       }
     };
   },

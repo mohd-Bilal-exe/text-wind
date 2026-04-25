@@ -1,5 +1,7 @@
 export type CssPrimitive = string | number;
 
+export type EasingCurve = 'linear' | 'in' | 'out' | 'in-out';
+
 export interface FluidTextTypeConfig {
   minSize: string;
   maxSize: string;
@@ -7,6 +9,7 @@ export interface FluidTextTypeConfig {
   maxLineHeight: CssPrimitive;
   weight: CssPrimitive;
   letterSpacing: string;
+  easing?: EasingCurve;
 }
 
 export interface TextwindOptions {
@@ -17,6 +20,7 @@ export interface TextwindOptions {
   fontFamilies?: Record<string, string>;
   colors?: Record<string, string>;
   opacitySteps?: number[];
+  easing?: EasingCurve;
 }
 
 export interface ResolvedTextwindOptions {
@@ -27,12 +31,14 @@ export interface ResolvedTextwindOptions {
   fontFamilies: Record<string, string>;
   colors: Record<string, string>;
   opacitySteps: number[];
+  easing: EasingCurve;
 }
 
 export interface TextGeneratorOptions {
   viewportMin?: CssPrimitive;
   viewportMax?: CssPrimitive;
   type?: Partial<FluidTextTypeConfig>;
+  easing?: EasingCurve;
 }
 
 export interface FontFamilyGeneratorOptions {

@@ -5,10 +5,10 @@ import HorizontalSection from './components/HorizontalSection';
 
 import { useLerpScroll } from './hooks/use-lerp-scroll';
 import { useMediaQuery } from './hooks/use-media-query';
-import FirstSection from './components/SECTIONS/First';
-import SecondSection from './components/SECTIONS/SecondSection';
-import ThirdSection from './components/SECTIONS/ThirdSection';
-import FourthSection from './components/SECTIONS/FourthSection';
+import FirstSection from './components/SECTIONS/ScalesSection';
+import SecondSection from './components/SECTIONS/PlaygroundSection';
+import ThirdSection from './components/SECTIONS/RegistrySection';
+import FourthSection from './components/SECTIONS/DeveloperSection';
 import FinSection from './components/SECTIONS/FinSection';
 import SetupSection from './components/SECTIONS/SetupSection';
 import ReferenceSection from './components/SECTIONS/ReferenceSection';
@@ -18,6 +18,7 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [isTesting, setIsTesting] = useState<boolean>(true);
   // Custom smoothed scroll progress (0-1)
   const scrollProgress = useLerpScroll();
 
@@ -94,6 +95,10 @@ function App() {
     currentStart += sectionWeight;
     return { ...section, range };
   });
+
+  if (isTesting) {
+    return <h1 className="text-fluid-heading/20">Test Text</h1>;
+  }
 
   if (isMobile) {
     return (
