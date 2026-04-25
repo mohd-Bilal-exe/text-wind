@@ -18,7 +18,6 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [animationComplete, setAnimationComplete] = useState(false);
-  const [isTesting, setIsTesting] = useState<boolean>(true);
   // Custom smoothed scroll progress (0-1)
   const scrollProgress = useLerpScroll();
 
@@ -95,10 +94,6 @@ function App() {
     currentStart += sectionWeight;
     return { ...section, range };
   });
-
-  if (isTesting) {
-    return <h1 className="text-fluid-heading/20">Test Text</h1>;
-  }
 
   if (isMobile) {
     return (
