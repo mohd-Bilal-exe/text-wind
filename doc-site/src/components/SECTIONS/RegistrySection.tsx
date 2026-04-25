@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import SectionNumber from './SectionNumber';
 import { useMediaQuery } from '../../hooks/use-media-query';
 import { CopyBlock } from './SetupSection';
