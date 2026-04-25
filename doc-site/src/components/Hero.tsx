@@ -57,10 +57,10 @@ export default function Hero({
         <motion.div
           initial={{ scale: 1, y: '25svh', x: '5%' }}
           animate={
-            phase >= 2 ? { scale: 0.6, y: '12svh', x: '5%' } : { scale: 1, y: '25svh', x: '5%' }
+            phase >= 2 ? { scale: 0.6, y: '32svh', x: '2%' } : { scale: 1, y: '25svh', x: '5%' }
           }
           transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-          style={{ transformOrigin: 'left top', opacity: phraseOpacity }}
+          style={{ transformOrigin: 'left top' }}
           className="absolute z-10 w-max flex flex-col items-start pointer-events-none"
         >
           {lines.map((line, lineIndex) => (
@@ -93,8 +93,6 @@ export default function Hero({
         {/* 2. THE MAIN TITLE (TEXTWIND) */}
         <motion.div
           style={{
-            opacity: globalOpacity,
-            scale: titleScale,
             transformOrigin: 'left bottom',
           }}
           className="absolute bottom-[5svh] left-0 w-full flex justify-between pointer-events-none z-0 px-4"
@@ -103,8 +101,8 @@ export default function Hero({
             {'TEXTWIND'.split('').map((char, index) => (
               <motion.span
                 key={index}
-                initial={{ y: '130%' }}
-                animate={phase >= 2 ? { y: 0 } : { y: '130%' }}
+                initial={{ y: '150%' }}
+                animate={phase >= 2 ? { y: 0 } : { y: '150%' }}
                 transition={{
                   delay: index * 0.05,
                   duration: 1.2,
