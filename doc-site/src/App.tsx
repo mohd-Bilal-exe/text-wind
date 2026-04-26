@@ -138,7 +138,7 @@ function App() {
         </motion.div>
         <motion.span
           initial={{ x: 500 }}
-          animate={{ x: animationComplete ? 0 : 500 }}
+          animate={{ x: animationComplete ? -45 : 500 }}
           transition={{ stiffness: 100, damping: 25 }}
           className="fixed h-screen bg-red-500 "
         >

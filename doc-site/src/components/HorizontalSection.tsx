@@ -146,7 +146,7 @@ export default function HorizontalSection({
             {label}
           </div>
 
-          <div className="mt-auto font-display text-fluid-subheading font-black text-crimson mb-4">
+          <div className="mt-auto font-display text-fluid-subheading/40 font-black text-crimson mb-4">
             §{id}
           </div>
         </motion.div>
