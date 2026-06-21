@@ -133,6 +133,17 @@ textwind({
 - [Migration](./docs/migration.md)
 - [Publishing and Local Testing](./docs/publishing.md)
 
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=mohd-Bilal-exe%2Ftext-wind&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=mohd-Bilal-exe/text-wind&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=mohd-Bilal-exe/text-wind&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=mohd-Bilal-exe/text-wind&type=date&legend=top-left" />
+ </picture>
+</a>
+
 ## License
 
 MIT
