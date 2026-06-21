@@ -141,6 +141,14 @@ const textwind: any = plugin.withOptions<TextwindOptions>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       addUtilities(utilities as any);
 
+      const scaleModifiers = Object.fromEntries(
+        resolved.scales.map((s) => [String(s), String(s)])
+      );
+
+      const opacityModifiers = Object.fromEntries(
+        resolved.opacitySteps.map((s) => [String(s), String(s)])
+      );
+
       for (const [typeName, typeConfig] of Object.entries(resolved.textTypes)) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const matchers: any = {
@@ -155,7 +163,7 @@ const textwind: any = plugin.withOptions<TextwindOptions>(
 
         matchUtilities(matchers, {
           values: { DEFAULT: '' },
-          modifiers: 'any',
+          modifiers: scaleModifiers,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any);
       }
@@ -169,7 +177,7 @@ const textwind: any = plugin.withOptions<TextwindOptions>(
 
         matchUtilities(matchers, {
           values: { DEFAULT: '' },
-          modifiers: 'any',
+          modifiers: opacityModifiers,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any);
       }

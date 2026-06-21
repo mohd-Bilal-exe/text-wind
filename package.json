@@ -1,6 +1,6 @@
 {
   "name": "text-wind",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Architectural text typography for Tailwind CSS. No breakpoints, no config edits, no rebuilds.",
   "license": "MIT",
   "author": "textwind contributors",

@@ -46,6 +46,9 @@ dist
 
 #agents skills 
 .agent/
+
+#Claude md
+CLAUDE.md
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
